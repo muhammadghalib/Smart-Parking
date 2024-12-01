@@ -1,8 +1,15 @@
 import cv2
 import serial
+import streamlit as st
+import numpy as np
+from PIL import Image
+
+# Inisialisasi Streamlit
+st.title("Status Parkir")
+st.text("Tekan tombol 'Mulai' untuk memulai pembaruan status parkir.")
 
 # Path gambar
-image_path = r"all off.png"
+image_path = r"C:\Users\Muhammad Ghalib\Downloads\all off.png"
 
 # Membaca gambar hanya sekali
 base_img = cv2.imread(image_path)
@@ -38,13 +45,14 @@ parking_boxes = {
 # Membuka koneksi serial di port COM3 dengan baud rate 115200
 ser = serial.Serial('COM3', 115200, timeout=0.05)
 
-# Menyimpan status kotak parkir
-parking_status = {key: False for key in parking_boxes.keys()}  # False berarti kosong, True berarti terisi
+# Inisialisasi status kotak parkir
+if "parking_status" not in st.session_state:
+    st.session_state.parking_status = {key: False for key in parking_boxes.keys()}
 
 # Fungsi untuk memperbarui kotak parkir
 def update_parking_display():
     img_copy = base_img.copy()
-    for parking_slot, is_terisi in parking_status.items():
+    for parking_slot, is_terisi in st.session_state.parking_status.items():
         if is_terisi:  # Jika slot terisi, gambar kotak merah
             x1, y1, x2, y2 = parking_boxes[parking_slot]
             cv2.rectangle(img_copy, (x1, y1), (x2, y2), (0, 0, 255), -1)  # Kotak merah terisi
@@ -52,25 +60,19 @@ def update_parking_display():
                          cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
     return img_copy
 
-# Membaca data dari serial dan menampilkan kotak sesuai status
-while True:
-    data = ser.readline().decode('utf-8').strip()
-    if data:
-        try:
-            parking_slot, slot_status = data.split()
-            parking_slot = int(parking_slot)
-            parking_status[parking_slot] = slot_status == "Terisi"
-        except (ValueError, KeyError):
-            # Abaikan data tidak valid
-            continue
+# Tombol untuk memulai pembaruan
+if st.button("Mulai"):
+    while True:
+        data = ser.readline().decode('utf-8').strip()
+        if data:
+            try:
+                parking_slot, slot_status = data.split()
+                parking_slot = int(parking_slot)
+                st.session_state.parking_status[parking_slot] = slot_status == "Terisi"
+            except (ValueError, KeyError):
+                continue
 
-    # Memperbarui tampilan hanya jika ada perubahan
-    display_img = update_parking_display()
-    cv2.imshow('Status Parkir', display_img)
-
-    # Memeriksa jika tombol 'q' ditekan untuk keluar dari loop
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-# Menutup jendela OpenCV setelah keluar dari loop
-cv2.destroyAllWindows()
+        # Memperbarui tampilan hanya jika ada perubahan
+        display_img = update_parking_display()
+        display_img_rgb = cv2.cvtColor(display_img, cv2.COLOR_BGR2RGB)
+        st.image(Image.fromarray(display_img_rgb), caption="Status Parkir", use_column_width=True)
