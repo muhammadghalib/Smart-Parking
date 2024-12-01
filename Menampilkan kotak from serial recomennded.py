@@ -2,7 +2,7 @@ import cv2
 import serial
 
 # Path gambar
-image_path = r"C:\Users\Muhammad Ghalib\Downloads\all off.png"
+image_path = r"all off.png"
 
 # Membaca gambar hanya sekali
 base_img = cv2.imread(image_path)
