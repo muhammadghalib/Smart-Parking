@@ -1,0 +1,258 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Mengatur elemen secara vertikal */
+    align-items: center; /* Memusatkan elemen secara horizontal */
+    background-color: #f4f4f4;
+    overflow-x: hidden; /* Menghindari scroll horizontal */
+}
+
+.title {
+    width: 100%;
+    text-align: center; /* Memusatkan judul */
+    margin: 0; /* Menghapus margin default */
+    padding: 10px 0; /* Memberikan ruang di sekitar teks */
+    position: fixed; /* Memastikan judul tetap di atas layar */
+    top: 0; /* Posisi judul di atas */
+    background-color: #fff; /* Warna latar belakang untuk judul */
+    z-index: 1000; /* Pastikan judul berada di atas elemen lainnya */
+    font-size: 2rem; /* Ukuran font judul */
+    color: #333; /* Warna teks */
+}
+
+.parking-map {
+    position: relative;
+    width: 100%; /* Memastikan peta mengambil lebar penuh */
+    max-width: 1000px; /* Menetapkan lebar maksimum */
+    margin-top: 60px; /* Memberikan ruang di bawah judul */
+    display: flex;
+    justify-content: center; /* Memastikan peta berada di tengah */
+    align-items: center; /* Memastikan peta berada di tengah secara vertikal */
+    overflow: hidden; /* Menghindari scroll tambahan */
+}
+
+.background-map {
+    width: 100%; /* Gambar mengisi lebar kontainer */
+    height: auto; /* Proporsi tetap terjaga */
+    display: block;
+}
+
+.slot {
+    position: absolute;
+    width: 100px; /* Ukuran kotak */
+    height: 46px;
+    background-color: rgb(94, 255, 0); /* Warna kotak */
+    border-radius: 5px; /* Opsional: sudut melengkung */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0); /* Warna teks */
+    font-size: 1.5em; /* Ukuran font */
+    font-family: fantasy;
+    text-align: center;
+}
+
+.mid-slot {
+    position: absolute;
+    width: 44px; /* Ukuran kotak */
+    height: 94px;
+    background-color: rgb(180, 180, 180); /* Warna kotak */
+    border-radius: 5px; /* Opsional: sudut melengkung */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0); /* Warna teks */
+    font-size: 1.5em; /* Ukuran font */
+    font-family: fantasy;
+    text-align: center;
+}
+
+/* Contoh posisi kotak */
+.slot1 {
+    top: 6.8%;
+    left: 18%;
+}
+
+.slot2 {
+    top: 17.8%;
+    left: 18%;
+}
+
+.slot3 {
+    top: 29.2%;
+    left: 18%;
+}
+
+.slot4 {
+    top: 40.5%;
+    left: 18%;
+}
+
+.slot5 {
+    top: 51.2%;
+    left: 18%;
+}
+
+.slot6 {
+    top: 62.1%;
+    left: 18%;
+}
+
+.slot7 {
+    top: 30%;
+    left: 42.1%;
+}
+
+.slot8 {
+    top: 30%;
+    left: 48.3%;
+}
+
+.slot9 {
+    top: 30%;
+    left: 54.8%;
+}
+
+.slot10 {
+    top: 30%;
+    left: 61.2%;
+}
+
+.slot11 {
+    top: 30%;
+    left: 67.5%;
+}
+
+.slot12 {
+    top: 6.8%;
+    left: 85.9%;
+}
+
+.slot13 {
+    top: 17.8%;
+    left: 85.9%;
+}
+
+.slot14 {
+    top: 51.7%;
+    left: 85.9%;
+}
+
+.slot15 {
+    top: 62.5%;
+    left: 85.9%;
+}
+
+@media (max-width: 430px) {
+    .parking-map {
+        position: relative;
+        width: 100vw; /* Memastikan peta mengambil seluruh lebar layar */
+        height: 100vh; /* Memastikan peta mengambil seluruh tinggi layar */
+        display: flex;
+        justify-content: center; /* Memusatkan peta secara horizontal */
+        align-items: flex-start; /* Memastikan peta menempel di bawah judul */
+        overflow: hidden; /* Menghindari scroll tambahan */
+    }
+
+    .background-map {
+        margin-top: -70px;
+        margin-left: -1px;
+        transform: rotate(90deg); /* Memutar gambar ke kanan */
+        width: 175vw; /* Gambar mengisi lebar viewport */
+        height: 100vh; /* Gambar mengisi tinggi viewport */
+        object-fit: contain; /* Menjaga proporsi gambar */
+        display: block;
+    }
+
+    .text {
+        transform: rotate(90deg); /* Memutar teks di dalam slot */
+    }
+
+    .slot {
+        width: 34px; /* Ukuran kotak */
+        height: 75px;
+    }
+
+    .mid-slot {
+        width: 71px; /* Ukuran kotak */
+        height: 34px;
+    }
+
+    /* Contoh posisi kotak */
+    .slot1 {
+        top: 15.3%;
+        left: 83.8%;
+    }
+
+    .slot2 {
+        top: 15.3%;
+        left: 73%;
+    }
+
+    .slot3 {
+        top: 15.3%;
+        left: 62%;
+    }
+
+    .slot4 {
+        top: 15.3%;
+        left: 50.6%;
+    }
+
+    .slot5 {
+        top: 15.3%;
+        left: 40%;
+    }
+
+    .slot6 {
+        top: 15.3%;
+        left: 29.5%;
+    }
+
+    .slot7 {
+        top: 35.1%;
+        left: 52%;
+    }
+
+    .slot8 {
+        top: 40.2%;
+        left: 52%;
+    }
+
+    .slot9 {
+        top: 45.5%;
+        left: 52%;
+    }
+
+    .slot10 {
+        top: 50.7%;
+        left: 52%;
+    }
+
+    .slot11 {
+        top: 56%;
+        left: 52%;
+    }
+
+    .slot12 {
+        top: 71%;
+        left: 83.8%;
+    }
+
+    .slot13 {
+        top: 71%;
+        left: 73%;
+    }
+
+    .slot14 {
+        top: 71%;
+        left: 39.6%;
+    }
+
+    .slot15 {
+        top: 71%;
+        left: 29.1%;
+    }
+}
